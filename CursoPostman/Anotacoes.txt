@@ -1,0 +1,12 @@
+Métodos 
+
+GET: Obter informações de um recurso pelo seu identificador ou uma lista de informações.
+POST: Criar algo no recurso do servidor.
+PUT: Atualizar alguma informação do servidor.
+DELETE: Remover alguma informação no servidor.
+
+-Para consultar o risco de um determinado cliente usa-se o login e senha
+    -Tem que ir em athorization e selecionar a autenticaçãoque consta na documentação
+    -Outra forma de verificar se está ativo é pelo o navegador.
+
+-É possível executar todos os testes por vez, lembrar de verificar a hierarquia e dependências.
