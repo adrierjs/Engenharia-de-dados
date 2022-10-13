@@ -1,0 +1,2 @@
+Entrada: The avocado 🥑 is popular in vegetarian cuisine as a substitute for meats in sandwiches and salads because of its high fat content 😄 
+Saída: O texto de saída digitado por Adrier José, no dia: 1664987885277
