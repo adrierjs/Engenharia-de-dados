@@ -35,7 +35,6 @@ const { json } = require('stream/consumers');
 ///////SERVER
 
 //A vantagem de colocar o arquivo da API para executar logo no começo do código é o ganho de memória que é proporcionado por conta disso
-const dataOveriview = fs.readFileSync(`${__dirname}/templates/template-overview.html`,'utf-8');
 const data = fs.readFileSync(`${__dirname}/dev-data/data.json`, 'utf-8'); // ele já carregou o arquivo de forma síncrona, assim que ocorrer a primeira requisição da página
 const dataObj = JSON.parse(data) //comando para executar arquivo Json
 
@@ -43,21 +42,11 @@ const dataObj = JSON.parse(data) //comando para executar arquivo Json
 const server = http.createServer((req,res)=>{
     const caminho = req.url //usei a função req.url para pegar o caminho que o usuário está 
     //Roteamento
+    if(caminho === '/' || caminho ==='/home'){
+        res.end('Bem vindo a pagina inicial do site')
+    } else if(caminho === '/p2'){
+        res.end('Segunda pagina')
 
-
-    //Overview page
-    if(caminho === '/' || caminho ==='/overview'){
-        res.writeHead(200,{
-            'tipo-de-conteudo':'text/html',
-            'my-header': 'overview'
-        })
-        res.end(dataOveriview)
-
-    //Product page 
-    } else if(caminho === '/product'){
-        res.end('Essa é a página de produto')
-
-    // API
     } else if(caminho === "/api"){
         // --------- Nesta forma aqui é menos eficiente, pois a cada execução do usuário a esse caminho, ele terá que novamente carregar o arquivo Json.
         // fs.readFile(`${__dirname}/dev-data/data.json`, 'utf-8', (err,data)=>{ //o __dirname é para executar em qualquer diretório atual, coloquei mais detalhes no curso da udemy
@@ -67,10 +56,11 @@ const server = http.createServer((req,res)=>{
                 'my-header':'API'
             })
             res.end(data)
-        } 
-        
-        //Not found
-        else{
+        }
+
+    else if(caminho === '/p3'){
+        res.end('Terceira pagina')
+    } else{
         res.writeHead(404,{
             'Tipo-de-conteudo': 'text/html',
             'my-heder' : 'hello world!'
