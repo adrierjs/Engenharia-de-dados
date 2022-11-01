@@ -1,6 +1,7 @@
 const fs = require('fs')
 const http = require('http');
 const url = require('url');
+const slugify = require('slugify');
 const replaceTemplate = require('./modules/replateTemplate.js')
 //////////////////////////////////////////////////////////////////////////
 ///////FILES - Manipulação de arquivos de forma síncrona e assíncrona
@@ -46,7 +47,8 @@ const data = fs.readFileSync(`${__dirname}/dev-data/data.json`, 'utf-8'); // ele
 
 const dataObj = JSON.parse(data) //irá abrir o arquivo json e converter para um array que ficará armazenado na variável dataObj
 
-
+const slugs = dataObj.map(el => slugify(el.productName, {lower: true})) //pegando tudo que está no array dataObj e convertendo para formato de url 
+console.log(slugs)
 const server = http.createServer((req, res) => {
 
     const {
