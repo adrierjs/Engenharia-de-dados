@@ -76,8 +76,10 @@ const server = http.createServer((req, res) => {
             'Content-type': 'text/html',
             'my-header': 'product'
         });
+
         
-        const product = dataObj[query.id];//a query.id retorna a posição do elemento no objeto
+
+        const product = dataObj[query.id]; //a query.id retorna a posição do elemento no objeto
         const output = replaceTemplate(tempProduct, product);
         res.end(output);
 
