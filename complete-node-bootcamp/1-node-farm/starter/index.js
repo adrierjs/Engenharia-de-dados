@@ -1,6 +1,7 @@
 const fs = require('fs')
 const http = require('http');
 const url = require('url');
+const replaceTemplate = require('./modules/replateTemplate.js')
 //////////////////////////////////////////////////////////////////////////
 ///////FILES - Manipulação de arquivos de forma síncrona e assíncrona
 
@@ -34,23 +35,9 @@ const url = require('url');
 //////////////////////////////////////////////////////////////////////////
 ///////SERVER
 
-const replaceTemplate = (temp, product)=>{ //função para realizar as alterações no nome do template
-    let output = temp.replace(/{%PRODUCTNAME%}/g,product.productName); //A função replace é para substituir um item no array
-    output = output.replace(/{%IMAGE%}/g,product.image);
-    ouput = output.replace(/{%FROM%}/g, product.from)
-    output = output.replace(/{%NUTRIENTS%}/,product.nutrients)
-    output = output.replace(/{%QUANTITY%}/g,product.quantity);
-    output = output.replace(/{%PRICE%}/g,product.price);
-    output = output.replace(/{%DESCRIPTION%}/g,product.description);
-    output = output.replace(/{%ID%}/g,product.id);
 
-    if(!product.organic) output = output.replace(/{%NOT_ORGANIC%}/g,'not-organic'); //se n for orgânico 
-
-    return output;
-    
-}
 const tempOverview = fs.readFileSync(`${__dirname}/templates/template-overview.html`, 'utf-8')
-const tempCard = fs.readFileSync(`${__dirname}/templates/template-cards.html`, 'utf-8')
+const tempCard = fs.readFileSync(`${__dirname}/templates/template-card.html`, 'utf-8')
 const tempProduct = fs.readFileSync(`${__dirname}/templates/template-product.html`, 'utf-8')
 
 
@@ -61,13 +48,15 @@ const dataObj = JSON.parse(data) //irá abrir o arquivo json e converter para um
 
 
 const server = http.createServer((req, res) => {
- 
-    const { query, pathname} = (url.parse(req.url, true)) //esse método retorna uma query com todas as informações referente a URL que o usuário acessou e o pathname está o endereço com caminho naquela determinada requisição
+
+    const {
+        query,
+        pathname
+    } = (url.parse(req.url, true)) //esse método retorna uma query com todas as informações referente a URL que o usuário acessou e o pathname está o endereço com caminho naquela determinada requisição
     // const pathName = req.url //usei a função req.url para pegar o caminho que o usuário está 
 
-    console.log(teste = (url.parse(req.url,true)))
     //Roteamento
-    
+
     //Overview page
     if (pathname === '/' || pathname === '/overview') {
         res.writeHead(200, {
@@ -77,13 +66,20 @@ const server = http.createServer((req, res) => {
 
 
         const cardsHtml = dataObj.map(el => replaceTemplate(tempCard, el)).join(' ');
-        const output = tempOverview.replace('{%PRODUTC_CARDS%}',cardsHtml);
+        const output = tempOverview.replace('{%PRODUTC_CARDS%}', cardsHtml);
         res.end(output);
 
 
         //Product page 
-    } else if (pathname === '/product') {
-        res.end('Essa é a página de produto');
+    } else if (pathname === '/product') { //Quando o cliente clica DETAIL, ele redireciona para a página de produto.
+        res.writeHead(200, {
+            'Content-type': 'text/html',
+            'my-header': 'product'
+        });
+        
+        const product = dataObj[query.id];//a query.id retorna a posição do elemento no objeto
+        const output = replaceTemplate(tempProduct, product);
+        res.end(output);
 
         // API
     } else if (pathname === "/api") {
