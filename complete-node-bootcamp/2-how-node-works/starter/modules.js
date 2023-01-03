@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-console.log(arguments);
-=======
 // Module.export
 const calculadora = require('./test-modules1');
 
@@ -10,7 +7,10 @@ console.log(c1.soma(20, 30));
 
 //Exports
 
-const c2 = require('./test-modules2');
+const {adicao, divisao, multi} = require('./test-modules2'); //O que fiz aqui foi basicamente fragmentar o objeto 
 
-console.log(c2.adicao(20,20))
->>>>>>> 17bd91937ab2181b94b2b46a9c89ff7b3612d036
+console.log(adicao(20,20))
+
+// Casching - CHamando a função sem atribuir o require a uma variável 
+require('./test-modules3')();
+require('./test-modules3')('Adrier');
