@@ -1,20 +1,68 @@
 const fs = require('fs');
 const superagent = require('superagent');
 
-fs.readFile(`${__dirname}/dog.txt`, (err, data) => {
-    if (err) return console.log(err.message)
+const readFilePro = file => {
+  return new Promise((resolve, reject) => {
+    fs.readFile(file, (err, data) => {
+      if (err) reject('I could not find that file 😢');
+      resolve(data);
+    });
+  });
+};
+
+const writeFilePro = (file, data) => {
+  return new Promise((resolve, reject) => {
+    fs.writeFile(file, data, err => {
+      if (err) reject('Could not write file 😢');
+      resolve('success');
+    });
+  });
+};
+
+
+const getDocPic = async () =>{
+  try{
+  const data = await readFilePro(`${__dirname}/dog.txt`);
+  console.log(`Beder: ${data}`);
+
+  const res = await superagent.get(`https://dog.ceo/api/breed/${data}/images/random`);
+  console.log(res.body.message);
+
+  await writeFilePro('dog-img.txt', res.body.message);
+  console.log(`Imagem gravada com sucesso`)
+  } catch {
+    console.log(err);
+  }
+
+
+}
+
+getDocPic();
+/*
+console.log('1: Will get dog pics!');
+getDogPic()
+  .then(x => {
+    console.log(x);
+    console.log('3: Done getting dog pics!');
+  })
+  .catch(err => {
+    console.log('ERROR 💥');
+  });
+*/
+/*
+readFilePro(`${__dirname}/dog.txt`)
+  .then(data => {
     console.log(`Breed: ${data}`);
-
-    superagent.get(`https://dog.ceo/api/breed/${data}/images/random`).then((res) => { //Como se fosse um if
-
-        console.log(res.header.date);
-        console.log(res.body.message);
-        fs.writeFile('doc-img.txt', `Breed: ${data}\nImg: ${res.body.message}`, (err) => {
-            if (err) console.log(err.message);
-            console.log("Arquivo de texto gravado com sucesso!")
-        })
-
-    }).catch((err) =>{ // Como se fosse um else
-        console.log(err.message);
-    })
-})
+    return superagent.get(`https://dog.ceo/api/breed/${data}/images/random`);
+  })
+  .then(res => {
+    console.log(res.body.message);
+    return writeFilePro('dog-img.txt', res.body.message);
+  })
+  .then(() => {
+    console.log('Random dog image saved to file!');
+  })
+  .catch(err => {
+    console.log(err);
+  });
+*/

@@ -1,2 +1,2 @@
 Breed: labrador
-Img: https://images.dog.ceo/breeds/labrador/n02099712_4550.jpg
+Img: https://images.dog.ceo/breeds/labrador/n02099712_221.jpg
