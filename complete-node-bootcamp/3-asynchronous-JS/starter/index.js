@@ -2,10 +2,10 @@ const fs = require('fs');
 const superagent = require('superagent');
 
 const readFilePro = file => {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => { //Criação da promisse
     fs.readFile(file, (err, data) => {
       if (err) reject('I could not find that file 😢');
-      resolve(data);
+      resolve(data); //Retorno da promisse   
     });
   });
 };
@@ -20,24 +20,28 @@ const writeFilePro = (file, data) => {
 };
 
 
-const getDocPic = async () =>{
-  try{
-  const data = await readFilePro(`${__dirname}/dog.txt`);
-  console.log(`Beder: ${data}`);
+const getDocPic = async () => {
+  try {
+    const data = await readFilePro(`${__dirname}/dog.txt`);
+    console.log(`Beder: ${data}`);
 
-  const res = await superagent.get(`https://dog.ceo/api/breed/${data}/images/random`);
-  console.log(res.body.message);
+    const res = await superagent.get(`https://dog.ceo/api/breed/${data}/images/random`);
+    console.log(res.body.message);
 
-  await writeFilePro('dog-img.txt', res.body.message);
-  console.log(`Imagem gravada com sucesso`)
+    await writeFilePro('dog-img.txt', res.body.message);
+    console.log(`Imagem gravada com sucesso`)
   } catch {
     console.log(err);
+    throw (err);
   }
-
-
+  return 'dog api';
 }
 
-getDocPic();
+
+
+
+const retorno = getDocPic();
+console.log(retorno);
 /*
 console.log('1: Will get dog pics!');
 getDogPic()
