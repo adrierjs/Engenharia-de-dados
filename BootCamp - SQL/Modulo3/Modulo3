@@ -1,0 +1,35 @@
+/*
+	Agregação
+Funções de agregação:
+-MiN
+-MAX
+-AVG
+-COUNT
+-SUM
+
+*/
+
+/* Realizando o agrupamento de duas colunas. Obs: Usei o round para que ele mostrasse o número inteiro.
+
+A vantagem de agrupar colunas é garantir a integridate dos dados
+
+
+----Having: é tipo um where das funções de agragações-----
+É usado para realizar a filtragem de um grupo de colunas */
+
+with 
+	total as (
+		select title, round(avg(replacement_cost+rental_rate),2)
+		as valor_total 
+		from film 
+		group by title having avg(replacement_cost+rental_rate) <=30.00
+	order by 2 desc)
+
+select * from total;
+select * from film where title ='Meet Chocolate';
+
+
+
+
+
+
