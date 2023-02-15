@@ -19,8 +19,7 @@ A vantagem de agrupar colunas é garantir a integridate dos dados
 
 with 
 	total as (
-		select title, round(avg(replacement_cost+rental_rate),2)
-		as valor_total 
+		select title, round(avg(replacement_cost+rental_rate),2) valor_total 
 		from film 
 		group by title having avg(replacement_cost+rental_rate) <=30.00
 	order by 2 desc)
