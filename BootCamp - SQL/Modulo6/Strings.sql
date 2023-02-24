@@ -1,0 +1,1 @@
+select lower(first_name ||'.' || last_name || '@gmail.com.br') as customer_email from customer

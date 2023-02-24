@@ -1,0 +1,45 @@
+Funções de tempo - SQL
+
+TIME: Ela irá retornar somente o tempo, exemplo:
+	SELECT TIME("19:30:10");
+
+
+DATE: Irá retornar somente a data, exemplo:
+	SELECT DATE("20-01-23");
+	
+TIMESTAMP: Irá retornar a data e o horário, exemplo:
+	SELECT TIMESTAMP("2017-07-23",  "13:10:11");
+	
+	
+TIMESTAMPTZ: Irá retornar o horário UTC
+
+
+--------------------------------------------------------
+SELECT NOW(): Irá mostra a data e horário agora
+
+SHOW TIMEZONE(): Irá mostrar a região que o horário está
+
+SELECT TIMEOFDAY(): Irá retornar o dia da semana, mes, data, hora com precisão e o horário UTC
+	Exemplo: Thu Feb 16 01:04:18.577691 2023 -03
+	
+	
+SELECT CURRENT_TIME: 01:06:07.691889-03:00
+
+SELECT CURRENT_DATE: 2023-02-16
+
+--------------------------------------------------------
+Extract date: Irá retornar o extrato das datas no intervalo de tempo selecionado
+YEAR: Ano 
+MOTH: Mês 
+WEEK: Semana 
+QUARTER: Trimestre
+Day: Dia
+Sintaxe: 
+	SELECT EXTRACT (YEAR from coluna) from tabela
+	
+	
+Comando AGE(coluna) from tabela: irá contar a partir da data de hoje o período em extenso de anos, meses, dias e horário
+	
+	
+
+
