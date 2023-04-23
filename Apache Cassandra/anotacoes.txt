@@ -1,0 +1,22 @@
+Anotações - Principais pontos - Apache Cassandra 
+
+Keyspace: É um container que define que a replicação e as configurações de armazenamento de um conjunto de tabelas;
+Criação de um keyspace 
+
+create keyspace nome with replication {'class': 'SimpleStrategy', 'replication_factor': '1'};
+
+Class: Pode ser SimplesStrategy ou NetworkStragegy. O SimpleStrategy é usado um keyspace que funciona somente em um datacenter, sem levar em consideração a topologia de rede, é bem mais simples. Já o NetworkTopologyStrategy é uma estratégia de replicação mais avançada que leva o poder de escolha em qual datacenter cada nó do cluster irá ficar, ele também pode ser distribuído em várias regiões geográficas diferentes.
+
+Replication_fator: Para um banco pequeno e simples, usasse somente um fator de replicação, mas para um mais complexo, usasse o fator de replicação igual a 3.
+Ou seja, fator de replicação for 3, para cada 1 tb de dados, 3 tb serão necessários.
+
+	
+Criar tabela, atributos e etc: É igual no banco relacional.
+
+Manipulação de dados:
+	writetime: Irá mostrar o tempo em milisegundos. Exemplo: select nome, writetime(id) from alunos;
+	Update: Atualizar os dados de uma linha. Exemplo:  update alunos set matricula = '234' where user_id = '1232';
+	TTL: É usado para deixar os valores temporariamente, por exemplo: A criação de tokens por 24 horas. Exemplo de uso: update alunos USING TTL 60 set nome ='temp' where user_id = '1232';
+	Collections - Forma de usar para uma coleção de dados: ALTER TABLE alunos ADD telefones3 set<int>; Exemplo de adição desses dados: update alunos set telefones2 = {'1342','2434242'} where user_id = '1232';
+
+
