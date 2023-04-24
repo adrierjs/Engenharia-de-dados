@@ -17,6 +17,9 @@ Manipulação de dados:
 	writetime: Irá mostrar o tempo em milisegundos. Exemplo: select nome, writetime(id) from alunos;
 	Update: Atualizar os dados de uma linha. Exemplo:  update alunos set matricula = '234' where user_id = '1232';
 	TTL: É usado para deixar os valores temporariamente, por exemplo: A criação de tokens por 24 horas. Exemplo de uso: update alunos USING TTL 60 set nome ='temp' where user_id = '1232';
-	Collections - Forma de usar para uma coleção de dados: ALTER TABLE alunos ADD telefones3 set<int>; Exemplo de adição desses dados: update alunos set telefones2 = {'1342','2434242'} where user_id = '1232';
+	Collections - Forma de usar para uma coleção de dados: ALTER TABLE alunos ADD telefones3 set<int>; 
+	Exemplo de adição desses dados: update alunos set telefones2 = {'1342','2434242'} where user_id = '1232'; Importante: Se uma coluna com a coleção for excluída, ela não poderá ser recriada novamente com o mesmo nome.
+	Indecies secundários: No Cassandra, não é possível selecionar todos as colunas de uma tabela utilizando o filtro where em uma coluna que não é chave primária, para contornar esses problemas, nós utilizaremos índicies. Para utilizá-los, temos o seguinte exemplo não recomendado: select * from alunos where email = 'teste' allow filtering; O allow filtering é o índice. Essa forma anterior não é confiável, para isso, vamos criar um indície para essa coluna. 
+	Exemplo correto: create index on alunos (email);
 
 
