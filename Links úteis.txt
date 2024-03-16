@@ -1,0 +1,6 @@
+Materais úteis
+
+Roadmap Engenharia de Dados - Data Hackers - https://medium.com/data-hackers/um-roadmap-de-estudos-para-se-tornar-um-engenheiro-a-de-dados-52fc2c14a3c8
+Roadmap data engineering 2024 - https://medium.com/@darshilp/roadmap-for-data-engineering-2024-af7ea4ead400
+
+
