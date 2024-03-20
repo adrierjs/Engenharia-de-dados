@@ -2,3 +2,8 @@ Seção 4: Armazenamento de dados distribuídos - S3
 
 O que é o S3?
 	O S3 é basicamente um serviço da AWS que serve para particionar dados e ele salva dados em formato de objetos. A grande vantagem de parcionar dados é irá garantir perfomance das consultas, por exemplo: O bucket Vendas-adrier/2024/04/01/00-00 - Eu consegui particionar esses dados em pequenas partes e dividir eles por horário, fazendo assim, que tenhamos um ganho de performance.
+	
+	
+Ciclo de vida do S3
+	O ciclo de vida do S3 é utilizado para reduzir custos, por exemplo: tenho dados de logs de usuários, esses dados não fazem sentido armazenar por muito tempo, geralmente os logs de atividades devem está disponíveis por até 6 meses, assim, reduzindo o índicie de problemas no futuro.
+	

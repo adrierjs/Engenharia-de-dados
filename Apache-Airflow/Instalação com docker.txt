@@ -1,0 +1,18 @@
+Instalando Apache Airflow com docker-compose 
+
+1 - Ir em https://airflow.apache.org/docs/apache-airflow/stable/howto/docker-compose/index.html para pegar o docker-compose 
+2 - Colocar o docker-compose.yml em alguma pasta
+3 - Liberar as permissões em todas as pastas do docker
+4 - Executar um docker-compose up para inicializar a instalação
+5 - Criar um usuário no Airflow 
+sudo docker exec -it airflow_airflow-webserver_1 airflow users create \
+    --username admin \
+    --firstname Adrier \
+    --lastname José \
+    --role Admin \
+    --email adrierj@gmail.com
+    
+Obs.: Caso não seja possível criar um usuário, deve liberar a permissão do Airflow no Docker com o seguinte comando: sudo usermod -aG docker seu_usuario
+
+Caso tenha problema com as pastas em modo root, execute o seguinte comando: sudo chown -R seu_usuario:seu_usuario dags logs config plugins
+
