@@ -4,3 +4,4 @@ Roadmap Engenharia de Dados - Data Hackers - https://medium.com/data-hackers/um-
 Roadmap data engineering 2024 - https://medium.com/@darshilp/roadmap-for-data-engineering-2024-af7ea4ead400
 
 
+curso de análise de dados - Ele aborda Pandas, Numpy, Mathlab, Power BI
