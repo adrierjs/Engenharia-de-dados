@@ -1,0 +1,11 @@
+O que é o Amazon Redshift?
+É um datalake desenvolvido pela Amazon. Ele foi baseado no PostgreSQL. 
+
+Quais a principal caterística dele?
+Ele é orientado a colunas, ou seja, é um banco feito para consulta de dados. Já para inserção de dados, ele é bastante caro.
+
+Quais seus principais concorrente?
+Snowflake, Bigquery, Hive
+
+Qual a principal caracteristica de um datalake?
+É basicamente guardar todos os dados de forma estruturada, tornando assim, fácil uma determinada consulta.
